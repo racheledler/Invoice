@@ -27,31 +27,44 @@ public class Main {
         price.add(4.99);
 
         String answer = "";
+        String name = "";
+        double total = 0.0;
+        int index = -1;
+
         do {
             System.out.println("What would you like to do? ");
             System.out.println("1.) Add purchase 2.) Show purchases 3.) Finish transaction");
             answer = input.nextLine();
+
             if (answer.equals("1")) {
                 System.out.print("Product: ");
-                String name = input.nextLine();
-                System.out.print("Price: ");
-                Double amount = input.nextDouble();
+                name = input.nextLine();
                 cartProduct.add(name);
-                cartPrice.add(amount);
+
+                for (int i= 0; i < product.size(); i++){
+                    if (name.equals(product.get(i))){
+                        index = i;
+                    }
+                }
+                cartPrice.add(price.get(index));
+
             } else if (answer.equals("2")) {
                 for (int i = 0; i < cartProduct.size(); i++) {
                     System.out.println(cartProduct.get(i) + " - " + cartPrice.get(i));
+
                 }
 
             }
 
 
         } while (!answer.equals("3"));
-        Double cartPriceSum = Double.valueOf(0);
-        for (Double num : cartPrice.toArray(new Double[0])) {
-            cartPriceSum = cartPriceSum + num;
+
+       {
+          for ( int i = 0; i < cartProduct.size(); i++)
+           total += cartPrice.get(i);
+
         }
-        System.out.println("Thank you for shopping at Howard University! Your total is:  " + cartPriceSum + ".");
+        System.out.println("Thank you for shopping at Howard University! Your total is:  " + total + ".");
     }
 }
 
